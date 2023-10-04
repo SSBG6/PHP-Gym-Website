@@ -1,0 +1,69 @@
+use onegym;
+CREATE TABLE users(
+	username varchar(50) not null,
+    firstname varchar(255) not null,
+    lastname varchar(255) not null,
+    password varchar(100) not null,
+	email varchar(255) not null,
+    address varchar(255),
+    city varchar(255),
+    contact int not null,
+    PRIMARY KEY (userid)
+);
+use onegym;
+CREATE TABLE admint(
+	username varchar(50) not null,
+    password varchar(50),
+    PRIMARY KEY (username)
+);
+use onegym;
+CREATE TABLE product(
+    name varchar(255) not null,
+    type varchar(255) not null,
+    flavour varchar(100) not null,
+    weight varchar(255) not null,
+    price decimal(5,3) not null,
+    brand varchar(255) not null,
+    stock int not null,
+    Description (255),
+    PRIMARY KEY (prodid)
+);
+
+use onegym;
+CREATE TABLE orders(
+    orderid varchar (5) not null REFERENCES gen_orders(orderid),
+    username varchar(50) not null REFERENCES users(username),
+    prodname varchar (50) REFERENCES product(name),
+    quantity int not null,
+    address varchar(255) REFERENCES users(address),
+    pmethod varchar(50),
+    contact int not null REFERENCES product(contact),
+    progress varchar(50),
+    PRIMARY KEY (orderid));
+
+use onegym;
+CREATE TABLE classes(
+	classid varchar (5) not null,
+	prodid varchar (5) REFERENCES Product(prodid),
+	cname varchar(50) not null,
+	capacity int not null,
+	PRIMARY KEY (classid)
+);
+
+
+
+
+create table membership (
+	username varchar(50),
+    membership varchar(50),
+    FOREIGN KEY (username ) REFERENCES users(username )
+);
+
+create table membershipprice (
+    membership varchar(50),
+    price decimal(9,2),
+    FOREIGN KEY (membership) REFERENCES membership(membership)
+);
+
+rest of databases where created on phpmyadmin website due to auto increment not functioning
+i have included a pdf of the structure of the database
